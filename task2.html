@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task1</title>
+    <script>
+        let calculateArea = (...params) => {
+            let square = 0;
+            let arr = [];
+            if (params.length == 1) {
+               arr.push(params[0] ** 2);
+               arr.push("квадрат");
+               arr.push(params);
+               }
+            else if (params.length == 2) {
+                arr.push(params[0] * params[1]);
+                arr.push("прямоугольник");
+                arr.push(params);
+            }
+            else if (params.length == 3) {
+                let p = (params[0] + params[1] + params[2]) / 2;
+                let square = (p * (p - params[0]) * (p - params[1]) * (p - params[2])) ** (1/2);
+                arr.push(square);
+                arr.push("треугольник");
+                arr.push(params);
+            }
+            else if (params.length == 4) {
+                let p = (params[0] + params[1] + params[2] + params[3]) / 2;
+                let square = ((p - params[0]) * (p - params[1]) * (p - params[2]) * (p - params[3])) ** (1/2);
+                arr.push(square);
+                arr.push("четырехугольник");
+                arr.push(params);
+            }
+            else
+            {
+                arr.push(0);
+                arr.push("неопределено");
+                arr.push(params);
+            }
+
+            let obj_output = {
+                area : arr[0],
+                figure : arr[1],
+                input : arr[2]
+            };
+            return obj_output;
+            };
+
+        console.log(calculateArea(4));
+        console.log(calculateArea(3, 5));
+        console.log(calculateArea(3, 4, 3));
+        console.log(calculateArea(2, 4, 4, 2));
+        console.log(calculateArea(2, 4, 4, 2, 5));
+        console.log(calculateArea(3, 3, 3, 3));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task1</title>
+    <script>
+        class Human
+        {
+            constructor(name, age, dateOfBirth)
+            {
+                this.name = name;
+                this.age = age;
+                this.dateOfBirth = dateOfBirth;
+            }
+
+            displayInfo(){
+                console.log('Имя: ', this.name, ', возраст: ', this.age, ', день рождения: ', this.dateOfBirth);
+            }
+        }
+
+        class Employee extends Human
+        {
+            constructor(name, age, dateOfBirth, salary, department){
+                super(name, age, dateOfBirth);
+                this.department = department;
+                this.salary = salary;
+            }
+
+            displayInfo(){
+                super.displayInfo();
+                console.log('Зарплата: ', this.salary, ', отдел: ', this.department);
+            }
+        }
+
+        class Developer extends Employee
+        {
+            constructor(name, age, dateOfBirth, salary, department){
+                super(name, age, dateOfBirth, salary, department);
+                this.manager = null;
+            }
+
+            setManager(manager){
+                this.manager = manager;
+            }
+
+            displayInfo(){
+                super.displayInfo();
+                console.log('Менеджер: ', this.manager);
+            }
+        }
+
+        class Manager extends Employee
+        {
+            constructor(name, age, dateOfBirth, salary, department){
+                super(name, age, dateOfBirth, salary, department);
+                this.developers = [];
+            }
+
+            addDeveloper(developer){
+                this.developers.push(developer);
+            }
+
+            deleteDeveloper(developer){
+                let index = this.developers.indexOf(developer);
+                this.developers.splice(index, 1);
+            }
+
+            displayInfo(){
+                super.displayInfo();
+                console.log('Разработчики:');
+                this.developers.forEach(function(item, index, arr) {
+                    console.log((index+1) + ". " + item.name);
+                })
+            }
+        }
+
+        let manager1 = new Manager("Петя", "35", "13.05.1982", 75000, "IT");
+
+        let developer1 = new Developer("Иван", "31", "13.05.1986", 65000, "IT");
+        let developer2 = new Developer("Максим", "27", "13.05.1991", 55000, "IT");
+        let developer3 = new Developer("Кирилл", "28", "13.05.1990", 60000, "IT");
+
+        manager1.addDeveloper(developer1);
+        manager1.addDeveloper(developer2);
+        manager1.addDeveloper(developer3);
+
+        developer1.setManager(manager1);
+        developer2.setManager(manager1);
+        developer3.setManager(manager1);
+
+        manager1.displayInfo();
+        console.log("----------------------------------");
+        developer1.displayInfo();
+
+        console.log("----------------------------------");
+        manager1.deleteDeveloper(developer2);
+        manager1.displayInfo();
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task1</title>
+    <script>
+        let loop = (times = 0, callback = null) => {
+            if (callback !== null) {
+               for (let i=1; i<=times; i++) {
+                   callback(i);
+               }
+               return true;
+            }
+            return false;
+        }
+
+        let func = function(num){
+            console.log("Вызов №" + num);
+        };
+
+        loop(3, func);
+        loop();
+        loop(2);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

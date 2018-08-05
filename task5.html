@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task1</title>
+    <script>
+        let promiseArray = [];
+        let max = 10;
+
+        for(let i=1; i<=max; i++) {
+            promiseArray.push(new Promise((resolve, reject) => {
+                // 1. Создаём новый объект XMLHttpRequest
+                var xhr = new XMLHttpRequest();
+
+                // 2. Конфигурируем его: GET-запрос на URL 'phones.json'
+                                xhr.open('GET', "http://jsonplaceholder.typicode.com/users/" + i, false);
+
+                // 3. Отсылаем запрос
+                                xhr.send();
+
+                // 4. Если код ответа сервера не 200, то это ошибка
+                if (xhr.status != 200) {
+                    // обработать ошибку
+                    //console.log( xhr.status + ': ' + xhr.statusText ); // пример вывода: 404: Not Found
+                    reject('404')
+                } else {
+                    // вывести результат
+                    //console.log( xhr.responseText ); // responseText -- текст ответа.
+                    obj_person = xhr.responseText;
+                }
+
+                //u = parseUrl("http://jsonplaceholder.typicode.com/users/" + i);
+                //obj_person = u;//.url;
+                //let obj_person = window.location.assign("http://jsonplaceholder.typicode.com/users/" + i);
+                    //reject('404');
+                resolve(obj_person);
+            }));
+        }
+
+
+        Promise.all(promiseArray).
+        then((result) => {
+                console.log(result);
+                //console.log('Ok', result)
+            },
+            (errorCode) => {
+                console.log('Error', errorCode);
+            }
+        );
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
